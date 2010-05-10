@@ -1,0 +1,93 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-05 12:01-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: letters/models.py:6
+msgid "name"
+msgstr "שם"
+
+#: letters/models.py:7
+msgid "email"
+msgstr "דואר אלקטרוני"
+
+#: letters/models.py:8
+msgid "fax"
+msgstr "פקס"
+
+#: letters/models.py:9
+msgid "url"
+msgstr "כתובת"
+
+#: letters/models.py:12 letters/models.py:23
+msgid "organization"
+msgstr "ארגון"
+
+#: letters/models.py:13
+msgid "organizations"
+msgstr "ארגונים"
+
+#: letters/models.py:22
+msgid "author"
+msgstr "מחבר"
+
+#: letters/models.py:24
+msgid "subject"
+msgstr "נושא"
+
+#: letters/models.py:25
+msgid "content"
+msgstr "תוכן"
+
+#: letters/models.py:29
+msgid "Letter from"
+msgstr "מכתב מאת"
+
+#: letters/models.py:32
+msgid "letter"
+msgstr "מכתב"
+
+#: letters/models.py:33
+msgid "letters"
+msgstr "מכתבים"
+
+#: letters/templates/list.html:5
+msgid "Letters list"
+msgstr "רשימת מכתבים"
+
+#: letters/templates/list.html:14
+msgid "From"
+msgstr "מאת"
+
+#: letters/templates/list.html:16
+msgid "Subject"
+msgstr "נושא"
+
+#: letters/templates/org.html:4
+msgid "Organization"
+msgstr "ארגון"
+
+#: letters/templates/org.html:11
+msgid "Email"
+msgstr "דואר אלקטרוני"
+
+#: letters/templates/org.html:13
+msgid "Fax"
+msgstr "פקס"
+
+#: letters/templates/org.html:17
+msgid "Recent mentions"
+msgstr "אזכורים"
