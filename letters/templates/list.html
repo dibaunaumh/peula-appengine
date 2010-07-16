@@ -7,6 +7,30 @@
 
 {% block content %}
 
+<input type=button value="{% trans 'Add letter' %}" onclick="document.location.href='/letter/add'"/>
+
+{% for letter in object_list %}
+    <table border="1" width="50%">
+        <tr>
+            <th>To:</th>
+            <td><a href="{{ letter.organization.get_absolute_url }}">{{ letter.organization }}</a></td>
+        </tr>
+        <tr>
+            <th>{% trans 'From' %}</th>
+            <td>{{  letter.author }}</td>
+            </tr><tr>
+            <th>{% trans 'Subject' %}</th>
+            <td>{{  letter.subject }}</td>
+        </tr>
+        <tr>
+            <td colspan=2>{{ letter.content }}</td>
+        </tr>
+        </table>
+        <br/><br/><br/>
+{% endfor %}
+
+
+
 <table border="1">
 
     {% for letter in list %}
@@ -22,5 +46,25 @@
     {% endfor %}
 
 </table>
+
+<p>
+{% if object_list %}
+{% for page in paginator.page_range %}
+{% ifequal page page_obj.number %}
+{{ page }}
+{% else %}
+<a href="javascript:go_to_page({{page}})">{{ page }}</a>
+{% endifequal %}
+{% endfor %}
+{% endif %}
+</p>
+
+<script>
+function go_to_page(page) {
+  var url = "/";
+  url += '?page=' + page;
+  document.location = url;
+}
+</script>
 
 {% endblock content %}

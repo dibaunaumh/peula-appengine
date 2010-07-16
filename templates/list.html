@@ -1,18 +1,70 @@
 {% extends "admin/base_site.html" %}
+{% load i18n %}
 
 
-{% block title %}Letters list{% endblock %}
+{% block title %}{% trans 'Letters list' %}{% endblock %}
 
 
 {% block content %}
+
+<script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+
+<script>
+var SEARCH_SIMILAR_URL = "/api/search_similar_letters/";
+
+function search_similar() {
+    var keywords = document.getElementById("keywords").value;
+    $.getJSON(SEARCH_SIMILAR_URL + encodeURI(keywords),
+        function(data) {
+            var list = "Similar letters:<ul>";
+            for (i in data) {
+                list += "<li><a href=\"" + "#" + "\">" + data[i]["fields"]["subject"] + "</a>";
+            }
+            list += "</ul>";
+            document.getElementById("letter_results").innerHTML = list;
+        });
+
+}
+</script>
+
+<p>Search letters:<br/>
+<input type="text" size="80" id="keywords" onKeyUp="search_similar()">
+</p>
+
+<div id="letter_results" style="display: block; visibility: visible; height: 100px">
+</div>
+
+<input type=button value="{% trans 'Add letter' %}" onclick="document.location.href='/letter/add'"/>
+
+{% for letter in object_list %}
+    <table border="1" width="50%">
+        <tr>
+            <th>To:</th>
+            <td><a href="{{ letter.organization.get_absolute_url }}">{{ letter.organization }}</a></td>
+        </tr>
+        <tr>
+            <th>{% trans 'From' %}</th>
+            <td>{{  letter.author }}</td>
+            </tr><tr>
+            <th>{% trans 'Subject' %}</th>
+            <td>{{  letter.subject }}</td>
+        </tr>
+        <tr>
+            <td colspan=2>{{ letter.content }}</td>
+        </tr>
+        </table>
+        <br/><br/><br/>
+{% endfor %}
+
+
 
 <table border="1">
 
     {% for letter in list %}
         <tr>
-            <th>From</th>
+            <th>{% trans 'From' %}</th>
             <td>{{  letter.author }}</td>
-            <th>Subject</th>
+            <th>{% trans 'Subject' %}</th>
             <td>{{  letter.subject }}</td>
         </tr>
         <tr>
@@ -21,5 +73,25 @@
     {% endfor %}
 
 </table>
+
+<p>
+{% if object_list %}
+{% for page in paginator.page_range %}
+{% ifequal page page_obj.number %}
+{{ page }}
+{% else %}
+<a href="javascript:go_to_page({{page}})">{{ page }}</a>
+{% endifequal %}
+{% endfor %}
+{% endif %}
+</p>
+
+<script>
+function go_to_page(page) {
+  var url = "/";
+  url += '?page=' + page;
+  document.location = url;
+}
+</script>
 
 {% endblock content %}

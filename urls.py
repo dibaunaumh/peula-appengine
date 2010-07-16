@@ -2,7 +2,16 @@ from django.conf.urls.defaults import *
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from letters.models import Letter
+from django.views.generic.list_detail import object_list
 admin.autodiscover()
+
+letters_list_info = {
+    "queryset" : Letter.objects.all(),
+    "template_name" : "list.html",
+    "paginate_by" : 4,
+}
+
 
 urlpatterns = patterns('',
     # Example:
@@ -17,7 +26,11 @@ urlpatterns = patterns('',
 
     (r'organization/(?P<org>\w+)', 'letters.views.org_page'),
 
+    (r'^api/search_similar_letters/(?P<prefix>\w+)', 'letters.views.search_similar_letters'),
+
     (r'^setup', 'letters.views.setup'),
 
-    (r'^', 'letters.views.home'),
+    (r'^letter/add', 'letters.views.add_letter'),
+
+    (r'^$', object_list, letters_list_info),
 )
